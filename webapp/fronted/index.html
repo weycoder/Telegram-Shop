@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛍️ Магазин в Telegram</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Хедер -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-shopping-bag"></i>
+                <h1>Telegram Shop</h1>
+            </div>
+            <div class="cart-icon" id="cartBtn">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
+        </header>
+
+        <!-- Категории -->
+        <div class="categories" id="categories">
+            <!-- Динамически загружаются -->
+        </div>
+
+        <!-- Товары -->
+        <div class="products-grid" id="products">
+            <!-- Товары загружаются динамически -->
+        </div>
+
+        <!-- Корзина -->
+        <div class="cart-overlay" id="cartOverlay">
+            <div class="cart-sidebar">
+                <div class="cart-header">
+                    <h2><i class="fas fa-shopping-cart"></i> Корзина</h2>
+                    <button class="close-cart" id="closeCart">&times;</button>
+                </div>
+                <div class="cart-items" id="cartItems">
+                    <!-- Товары в корзине -->
+                </div>
+                <div class="cart-footer">
+                    <div class="cart-total">
+                        Итого: <span id="cartTotal">0</span> ₽
+                    </div>
+                    <button class="checkout-btn" id="checkoutBtn">
+                        <i class="fas fa-paper-plane"></i> Оформить заказ
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модальное окно товара -->
+        <div class="modal-overlay" id="productModal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h2 id="modalTitle"></h2>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <img id="modalImage" src="" alt="">
+                    <p id="modalDescription"></p>
+                    <div class="modal-price" id="modalPrice"></div>
+                    <div class="quantity-selector">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" id="quantity" value="1" min="1">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="add-to-cart-btn" id="addToCartModal">
+                        <i class="fas fa-cart-plus"></i> Добавить в корзину
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

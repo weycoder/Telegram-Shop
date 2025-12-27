@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👨‍💼 Панель администратора</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Сайдбар -->
+        <div class="sidebar">
+            <div class="logo">
+                <i class="fas fa-crown"></i>
+                <h2>Админ-панель</h2>
+            </div>
+            <nav class="nav">
+                <a href="#dashboard" class="nav-link active">
+                    <i class="fas fa-chart-line"></i> Статистика
+                </a>
+                <a href="#products" class="nav-link">
+                    <i class="fas fa-box"></i> Товары
+                </a>
+                <a href="#orders" class="nav-link">
+                    <i class="fas fa-clipboard-list"></i> Заказы
+                </a>
+                <a href="#add-product" class="nav-link">
+                    <i class="fas fa-plus-circle"></i> Добавить товар
+                </a>
+            </nav>
+        </div>
+
+        <!-- Основной контент -->
+        <div class="main-content">
+            <!-- Хедер -->
+            <header class="admin-header">
+                <h1 id="pageTitle">Статистика</h1>
+                <button class="refresh-btn" onclick="loadData()">
+                    <i class="fas fa-sync-alt"></i> Обновить
+                </button>
+            </header>
+
+            <!-- Контентные страницы -->
+            <div class="content">
+                <!-- Статистика -->
+                <div id="dashboard" class="page active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: #667eea;">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalProducts">0</h3>
+                                <p>Всего товаров</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: #4CAF50;">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalOrders">0</h3>
+                                <p>Всего заказов</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: #FF9800;">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="pendingOrders">0</h3>
+                                <p>Ожидают обработки</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: #9C27B0;">
+                                <i class="fas fa-ruble-sign"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalRevenue">0 ₽</h3>
+                                <p>Общая выручка</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Список товаров -->
+                <div id="products" class="page">
+                    <div class="table-container">
+                        <table class="products-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Изображение</th>
+                                    <th>Название</th>
+                                    <th>Цена</th>
+                                    <th>Остаток</th>
+                                    <th>Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productsTable">
+                                <!-- Товары загружаются динамически -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Список заказов -->
+                <div id="orders" class="page">
+                    <div class="table-container">
+                        <table class="orders-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Пользователь</th>
+                                    <th>Товары</th>
+                                    <th>Сумма</th>
+                                    <th>Статус</th>
+                                    <th>Дата</th>
+                                    <th>Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ordersTable">
+                                <!-- Заказы загружаются динамически -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Добавление товара -->
+                <div id="add-product" class="page">
+                    <form id="addProductForm" class="product-form">
+                        <div class="form-group">
+                            <label for="name">Название товара *</label>
+                            <input type="text" id="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Описание</label>
+                            <textarea id="description" rows="4"></textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="price">Цена (₽) *</label>
+                                <input type="number" id="price" step="0.01" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="stock">Количество *</label>
+                                <input type="number" id="stock" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category">Категория</label>
+                                <input type="text" id="category">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="image_url">URL изображения</label>
+                            <input type="url" id="image_url"
+                                   placeholder="https://example.com/image.jpg">
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-save"></i> Сохранить товар
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно редактирования -->
+    <div class="modal-overlay" id="editModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Редактировать товар</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="editProductForm">
+                <input type="hidden" id="editId">
+                <div class="form-group">
+                    <label>Название</label>
+                    <input type="text" id="editName" required>
+                </div>
+                <div class="form-group">
+                    <label>Цена</label>
+                    <input type="number" id="editPrice" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label>Количество</label>
+                    <input type="number" id="editStock" required>
+                </div>
+                <button type="submit" class="submit-btn">Сохранить изменения</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
